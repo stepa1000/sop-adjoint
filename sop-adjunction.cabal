@@ -26,13 +26,18 @@ source-repository head
 library
   exposed-modules:
       Lib
+      SOP.Data.Combinators
+      SOP.Data.Functor.Adjunction
   other-modules:
       Paths_sop_adjunction
   hs-source-dirs:
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      adjunctions
+    , base >=4.7 && <5
+    , distributive
+    , generics-sop
   default-language: Haskell2010
 
 executable sop-adjunction-exe
@@ -43,7 +48,10 @@ executable sop-adjunction-exe
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      adjunctions
+    , base >=4.7 && <5
+    , distributive
+    , generics-sop
     , sop-adjunction
   default-language: Haskell2010
 
@@ -56,6 +64,9 @@ test-suite sop-adjunction-test
       test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      adjunctions
+    , base >=4.7 && <5
+    , distributive
+    , generics-sop
     , sop-adjunction
   default-language: Haskell2010
