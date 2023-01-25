@@ -24,6 +24,7 @@ dependencies:
 - generics-sop
 - adjunctions
 - distributive
+- comonad
 
 ghc-options:
 - -Wall

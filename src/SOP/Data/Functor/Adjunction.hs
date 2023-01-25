@@ -8,6 +8,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE EmptyCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE PolyKinds #-}
 
 module SOP.Data.Functor.Adjunction where
 
@@ -17,6 +18,27 @@ import Data.Functor.Rep as FR
 import Data.Distributive
 
 import Data.Void
+{-
+type family Concat (x :: [a]) (y :: [a]) :: [a]
+
+type instance Concat '[] '[] = '[]
+type instance Concat '[] (y ': ys) = (y ': ys)
+type instance Concat (x ': xs) (y ': ys) = (x ': (Concat xs (y ': ys)) )
+
+--data Concatination f1 f2 f3 where
+--  Concatination :: Concatination 
+
+class CxtConcact f1 f2 where
+  concat :: Proxy f1 -> Proxy f2 -> Proxy (Concat f1 f2)
+
+class ConcatNSF f1 f2 where
+  concatNSF :: NSF f1 a -> NSF f2 b -> [NSF (Concat f1 f2) (Either a b)]
+
+instance ConcatNSF xs f2 => ConcatNSF (x ': xs) f2 where
+  concatNSF (NSF nsf1) nsf2 = NSF <$> concatNSF nsf1 nsf -- [Right <$> f1 nsf1 nsf2, Left <$> f2 nsf1 nsf2]
+  concatNSF (ZF a) nsf = [Left <$> (ZF a), Right <$> (NSF nsf)]
+-}
+-- instance 
 
 data family AdjL a :: * -> * 
 data family AdjR a :: * -> *
